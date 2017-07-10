@@ -1,2 +1,26 @@
 # Sudoku-Solver
 Sudoku Solver C++ 
+
+Sudoku Solving Algorithms 
+
+Sudoku is a simple puzzle where the player puts numbers from one to nine into a nine by nine grid of cells. There are only four conditions to abide by to solve the puzzle. The first rule is the each cell may only contain one number. The second and third are that each row and column can’t contain any repeated numbers therefore contain every number from one to nine. The final rule is that the nine by nine grid is subdivided into nine, three by three, grids and that all of the three by three grids can’t contain any repeated numbers and again therefore must contain every number from one to nine
+
+The problem tackled to solve a sudoku puzzle is that only a certain number of values for the cells are given (partially depending on the difficulty of the sudoku) and the rest are left blank, and are to be worked out from the numbers given.
+
+There are many ways for a computer to work out the solution for sudoku puzzles by utilizing a variety of different algorithms. Each having their own benefits and drawbacks with some being practical to use and others being completely unfeasible in some situation.
+
+To analyse a sudoku it is placed into a two dimensional array of type int (or of a custom type) of size nine by nine to represent the grid. This allows the problem to be dealt with in a way which is easy to visualise and makes the problem much easier than having an array which is eighty one cells long.
+
+The simplest algorithm to work out a solution for a sudoku is what is known as a brute force algorithm. It is a very unintelligent solution to the problem but is very simple. It places a one in the empty spaces sequentially in the grid, then checks if there are repeat numbers in any column, row or three by three square. If there are no repeats it moves on to the next cell and repeats. If there are repeats it increments the value by one each time, unless it tries to place a nine and realises that it can’t be placed as there are repeats where it goes to the previous cell and increments that value by one and start again.
+
+The main issue with a brute force algorithm is that it takes a great deal of computational power, hence the name “brute force”. This makes it unsuitable for problems where there are many unfilled cells to work out. If there are only a few unknown cells, for example half a dozen, a brute force algorithm will be able to work out a solution in a reasonable time. However if there are lots of values, for example twenty (which is not many for a sudoku puzzle), it starts getting infeasible. it would be to work out any even slightly complicated sudoku puzzles as they would require a ridiculous number of guesses to stand any chance of getting the right answer. On a positive note, a brute force algorithm will always provide an answer if given enough time (which could well be impossible).
+
+Another method is to mimic the way people solve sudoku puzzles. This involves checking each individual square for the possible values which it could possibly be by ruling out any number from one to nine which appears in the same row, column or square as the cell. This is done by creating a custom type which contains at least an integer value for the number in the cell as well as an array of type int or bool which is nine long to store what values that cell can and can’t be. When the algorithm finds a cell with only one possibility it changes the value to the possibility and rechecks every cell, building a solution in several iterations.
+
+This solution to the problem is a rather intelligent method as no random guessing is involved and as a result is very quick and not resource intensive. When paired with other algorithms it adds a layer of intelligence as it can be used to stop testing of solutions to cells which are impossible and therefore saving time. 
+
+There is a complication with this algorithm for difficult sudokus. As it depends on finding only one solution for each cell and then filling that cell with the only possible value, this algorithm runs into a brick wall when challenged with difficult sudokus. This is because with some problems the algorithm will work out have no cell with only one solution which means that the algorithm has no way of finding a solution. This would be the point where the code would have to resort to a different algorithm but taking the possibilities into consideration.
+
+Backtracking is another algorithm for completing sudoku puzzles where the computer iterates every possible answer for the sudoku being solved. The algorithm makes a copy of the original sudoku and then assigns values to the empty cells. The resulting solution is then checked if it is legal with regards to the rules of sudoku. If not, it is discarded and the values in the grid put back to how they were originally and the values for the empty cells are picked again.
+
+Backtracking is able to solve any valid sudoku so that makes it very advantageous. It also is quick at solving problems which makes it a very useful algorithm to use. However backtracking can be viewed as slightly unintelligent so for more efficient code it would have to be paired with one or more other algorithms.  
